@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsobane <hsobane@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hsobane <hsobane@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 09:14:52 by hsobane           #+#    #+#             */
-/*   Updated: 2023/12/30 18:04:47 by hsobane          ###   ########.fr       */
+/*   Updated: 2024/01/03 01:51:35 by hsobane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@
 # include <signal.h>
 # include <mlx.h>
 
-# define LEFT 123
-# define RIGHT 124
-# define UP 126
-# define DOWN 125
-# define ESC 53
+# define LEFT 65361
+# define RIGHT 65363
+# define UP 65362
+# define DOWN 65364
+# define ESC 65307
 
 typedef struct s_map
 {
@@ -69,13 +69,13 @@ typedef struct s_vars
 
 
 // main
-void	print_matrix(char **matrix);
+void	print_matrix(char **matrix, int x, int y);
 
 // parse_args
 int		check_dimension(t_map *map);
 int		check_walls(t_map *map);
 int		check_components(t_map *map);
-int		flood_fill(char **map, int x, int y, int c);
+int		flood_fill(char **map, int x, int y, int *c);
 int		check_path(t_map *map);
 t_map	*parse_args(int argc, char **argv);
 void	get_player_pos(t_map *map, int *x, int *y);
@@ -92,12 +92,14 @@ int		map_size(t_map *map);
 int		ft_strlen(char *str);
 char	*ft_strchr(const char *s, int c);
 int		num_of_occurence(char *str, char c);
+void	ft_putnbr(int n);
 
 // mlx_utils
 void	move_lplayer(t_vars *vars, int direction);
 int		move_gplayer(t_vars *vars);
 int		key_press(int keycode, t_vars *vars);
-void	exit_game(t_vars *vars);
+int		exit_game(t_vars *vars);
 void	init_mlx(t_vars *vars);
+void	set_steps(t_vars *vars);
 
 #endif

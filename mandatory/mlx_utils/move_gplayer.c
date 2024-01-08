@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_gplayer.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsobane <hsobane@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hsobane <hsobane@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 12:55:41 by hsobane           #+#    #+#             */
-/*   Updated: 2023/12/30 21:13:36 by hsobane          ###   ########.fr       */
+/*   Updated: 2024/01/03 01:03:26 by hsobane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ static void	display_img(t_vars *vars, int x, int y, int direction)
 
 int	move_gplayer(t_vars *vars)
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
 
 	x = 0;
 	while (x < vars->data.win_width / 50)

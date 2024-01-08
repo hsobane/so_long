@@ -3,23 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   flood_fill.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsobane <hsobane@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hsobane <hsobane@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:29:57 by hsobane           #+#    #+#             */
-/*   Updated: 2023/12/28 16:31:04 by hsobane          ###   ########.fr       */
+/*   Updated: 2024/01/02 17:23:53 by hsobane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-static int	empty_square(char **map, int x, int y, int c)
+static int	empty_square(char **map, int x, int y)
 {
 	if (x < 0 || y < 0 || !map[y] || !map[y][x])
 		return (0);
-	if (map[y][x] == 'E' && c != 0)
-		return (0);
 	if (map[y][x] == '1' || map[y][x] == 'V' || map[y][x] == 'U'
-		|| map[y][x] == 'Q')
+		|| map[y][x] == 'Q' || map[y][x] == 'K')
 		return (0);
 	return (1);
 }
@@ -30,33 +28,44 @@ static void	set_square(char **map, int x, int y, int *c)
 		map[y][x] = 'V';
 	else if (map[y][x] == 'P')
 		map[y][x] = 'Q';
+	else if (map[y][x] == 'E')
+	{
+		*c -= 1;
+		map[y][x] = 'K';
+	}
+	else if (map[y][x] == 'e')
+		map[y][x] = 'K';
 	else if (map[y][x] == 'C')
 	{
 		*c -= 1;
 		map[y][x] = 'U';
 	}
+	else if (map[y][x] == 'c')
+		map[y][x] = 'U';
 }
 
-static void	unset_square(char **map, int x, int y, int *c)
+static void	unset_square(char **map, int x, int y)
 {
 	if (map[y][x] == 'V')
 		map[y][x] = '0';
 	else if (map[y][x] == 'Q')
 		map[y][x] = 'P';
+	else if (map[y][x] == 'K')
+		map[y][x] = 'e';
 	else if (map[y][x] == 'U')
-	{
-		map[y][x] = 'C';
-		*c += 1;
-	}
+		map[y][x] = 'c';
 }
 
-int	flood_fill(char **map, int x, int y, int c)
+int	flood_fill(char **map, int x, int y, int *c)
 {
-	if (map[y][x] == 'E' && c == 0)
+	// print_matrix(map, x, y);
+	// printf("c = %d\n", *c);
+	// pause();
+	if (*c == -1)
 		return (1);
-	if (empty_square(map, x, y, c) == 0)
+	if (empty_square(map, x, y) == 0)
 		return (0);
-	set_square(map, x, y, &c);
+	set_square(map, x, y, c);
 	if (flood_fill(map, x + 1, y, c))
 		return (1);
 	if (flood_fill(map, x - 1, y, c))
@@ -65,6 +74,6 @@ int	flood_fill(char **map, int x, int y, int c)
 		return (1);
 	if (flood_fill(map, x, y - 1, c))
 		return (1);
-	unset_square(map, x, y, &c);
+	unset_square(map, x, y);
 	return (0);
 }
