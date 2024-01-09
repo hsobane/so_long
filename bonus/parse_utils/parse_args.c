@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsobane <hsobane@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: hsobane <hsobane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 19:24:07 by hsobane           #+#    #+#             */
-/*   Updated: 2024/01/03 14:23:21 by hsobane          ###   ########.fr       */
+/*   Updated: 2024/01/09 19:32:17 by hsobane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,19 +88,24 @@ t_map	*parse_args(int argc, char **argv)
 		exit(1);
 	}
 	check_file_extention(argv[1]);
+	printf("check\n");
 	fd = open_wrapper(argv[1]);
+	printf("check\n");
 	map = get_raw_map(fd);
+	printf("check\n");
 	if (check_dimension(map) || check_walls(map) || check_components(map)
 		|| check_path(map))
 	{
 		map_clear(&map);
 		exit(1);
 	}
+	printf("check\n");
 	if (close(fd) < 0)
 	{
 		write(2, "Can't close file\n", 17);
 		map_clear(&map);
 		exit(1);
 	}
+	printf("check\n");
 	return (map);
 }

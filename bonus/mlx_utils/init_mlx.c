@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsobane <hsobane@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: hsobane <hsobane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 13:04:51 by hsobane           #+#    #+#             */
-/*   Updated: 2024/01/03 14:09:59 by hsobane          ###   ########.fr       */
+/*   Updated: 2024/01/09 16:08:00 by hsobane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	ft_matrix_len(char **matrix)
 	return (i);
 }
 
-static void	set_exit_pos(char **map, int *exit)
+static void	set_position(char **map, int *coord, char c)
 {
 	int		i;
 	int		j;
@@ -33,11 +33,10 @@ static void	set_exit_pos(char **map, int *exit)
 		j = 0;
 		while (map[i][j])
 		{
-			if (map[i][j] == 'E')
+			if (map[i][j] == c)
 			{
-				exit[0] = j;
-				exit[1] = i;
-				return ;
+				coord[0] = j;
+				coord[1] = i;
 			}
 			j++;
 		}
@@ -69,11 +68,11 @@ static int	get_collectibles(char **map)
 
 static void	init_imgs(t_vars *vars)
 {
-	vars->imgs.b = mlx_xpm_file_to_image(vars->mlx, "textures/brick.xpm",
+	vars->imgs.b = mlx_xpm_file_to_image(vars->mlx, "textures/wall_11111.xpm",
 			&vars->imgs.width, &vars->imgs.height);
-	vars->imgs.w = mlx_xpm_file_to_image(vars->mlx, "textures/wall.xpm",
+	vars->imgs.w = mlx_xpm_file_to_image(vars->mlx, "textures/brick_11.xpm",
 			&vars->imgs.width, &vars->imgs.height);
-	vars->imgs.c = mlx_xpm_file_to_image(vars->mlx, "textures/coin.xpm",
+	vars->imgs.c = mlx_xpm_file_to_image(vars->mlx, "textures/coin_1.xpm",
 			&vars->imgs.width, &vars->imgs.height);
 	vars->imgs.e[0] = mlx_xpm_file_to_image(vars->mlx, "textures/exit.xpm",
 			&vars->imgs.width, &vars->imgs.height);
@@ -83,15 +82,9 @@ static void	init_imgs(t_vars *vars)
 			&vars->imgs.width, &vars->imgs.height);
 	vars->imgs.p[1] = mlx_xpm_file_to_image(vars->mlx, "textures/player_left.xpm",
 			&vars->imgs.width, &vars->imgs.height);
-	vars->imgs.p[2] = mlx_xpm_file_to_image(vars->mlx, "textures/player_left.xpm",
+	vars->imgs.m[0] = mlx_xpm_file_to_image(vars->mlx, "textures/enemy_l.xpm",
 			&vars->imgs.width, &vars->imgs.height);
-	vars->imgs.p[3] = mlx_xpm_file_to_image(vars->mlx, "textures/player_right.xpm",
-			&vars->imgs.width, &vars->imgs.height);
-	vars->imgs.m[0] = mlx_xpm_file_to_image(vars->mlx, "textures/player_right.xpm",
-			&vars->imgs.width, &vars->imgs.height);
-	vars->imgs.m[1] = mlx_xpm_file_to_image(vars->mlx, "textures/player_left.xpm",
-			&vars->imgs.width, &vars->imgs.height);
-	vars->imgs.m[2] = mlx_xpm_file_to_image(vars->mlx, "textures/player_left.xpm",
+	vars->imgs.m[1] = mlx_xpm_file_to_image(vars->mlx, "textures/enemy_r.xpm",
 			&vars->imgs.width, &vars->imgs.height);
 }
 
@@ -100,9 +93,15 @@ static void	init_data(t_vars *vars)
 	vars->data.win_width =  50 * ft_strlen(vars->map[0]);
 	vars->data.win_height = 50 * ft_matrix_len(vars->map);
 	vars->data.collectibles = get_collectibles(vars->map);
-	vars->data.direction = RIGHT;
+	vars->data.enemy_on_col = 0;
+	vars->data.eldirection = LEFT;
+	vars->data.edirection = LEFT;
+	vars->data.pdirection = RIGHT;
+	vars->data.pldirection = RIGHT;
 	vars->data.steps = 0;
-	set_exit_pos(vars->map, vars->data.exit);
+	set_position(vars->map, vars->data.exit, 'E');
+	set_position(vars->map, vars->data.enemy, 'M');
+	set_position(vars->map, vars->data.player, 'P');
 }
 
 void	init_mlx(t_vars *vars)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsobane <hsobane@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: hsobane <hsobane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 09:14:52 by hsobane           #+#    #+#             */
-/*   Updated: 2024/01/03 16:24:59 by hsobane          ###   ########.fr       */
+/*   Updated: 2024/01/09 14:04:10 by hsobane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@
 # include <signal.h>
 # include <mlx.h>
 
-# define LEFT 65361
-# define RIGHT 65363
-# define UP 65362
-# define DOWN 65364
-# define ESC 65307
+# define LEFT 123
+# define RIGHT 124
+# define UP 126
+# define DOWN 125
+# define ESC 53
 
 typedef struct s_map
 {
@@ -35,21 +35,12 @@ typedef struct s_map
 	struct s_map	*next;
 }				t_map;
 
-typedef struct s_img
-{
-	void	*img[4][10];
-	int		x;
-	int		y;
-	int		i;
-	int		j;
-}			t_img;
-
 typedef struct s_imgs
 {
-	t_img	p;
-	t_img	m;
+	void	*p[2];
+	void	*m[2];
 	void	*w;
-	t_img	e;
+	void	*e[2];
 	void	*c;
 	void	*b;
 	int		width;
@@ -58,10 +49,16 @@ typedef struct s_imgs
 
 typedef struct s_data
 {
-	int	direction;
+	int	pdirection;
+	int	pldirection;
+	int	edirection;
+	int	eldirection;
 	int	collectibles;
 	int	steps;
 	int	exit[2];
+	int	enemy[2];
+	int	player[2];
+	int	enemy_on_col;
 	int	win_width;
 	int	win_height;
 }			t_data;
@@ -110,5 +107,6 @@ int		key_press(int keycode, t_vars *vars);
 int		exit_game(t_vars *vars);
 void	init_mlx(t_vars *vars);
 void	set_steps(t_vars *vars);
+void	move_lenemy(t_vars *vars);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsobane <hsobane@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: hsobane <hsobane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 09:14:52 by hsobane           #+#    #+#             */
-/*   Updated: 2024/01/03 01:51:35 by hsobane          ###   ########.fr       */
+/*   Updated: 2024/01/08 11:46:32 by hsobane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@
 # include <signal.h>
 # include <mlx.h>
 
-# define LEFT 65361
-# define RIGHT 65363
-# define UP 65362
-# define DOWN 65364
-# define ESC 65307
+# define LEFT 123
+# define RIGHT 124
+# define UP 126
+# define DOWN 125
+# define ESC 53
 
 typedef struct s_map
 {

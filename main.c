@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsobane <hsobane@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: hsobane <hsobane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 22:24:18 by hsobane           #+#    #+#             */
-/*   Updated: 2024/01/03 17:56:10 by hsobane          ###   ########.fr       */
+/*   Updated: 2024/01/09 18:23:16 by hsobane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-#define ESC 65307
+#define ESC 53
 
 typedef struct s_imgs
 {
@@ -54,7 +54,7 @@ typedef struct s_vars
 
 int	render_b(t_vars *vars)
 {
-	usleep(1000000);
+	usleep(100000);
 	mlx_clear_window(vars->mlx, vars->win);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->b.img, vars->b.x, vars->b.y);
 	vars->b.x += 50;
@@ -73,8 +73,8 @@ int render_w(t_vars *vars)
 int	close_win(t_vars *vars)
 {
 	mlx_destroy_window(vars->mlx, vars->win);
-	mlx_destroy_display(vars->mlx);
-	free(vars->mlx);
+	//mlx_destroy_display(vars->mlx);
+	//free(vars->mlx);
 	exit(0);
 }
 
@@ -85,10 +85,20 @@ int	key_hook(int keycode, t_vars *vars)
 	return (0);
 }
 
+int	incre(int *x)
+{
+	*x += 1;
+	printf("%d\n", *x);
+	return (0);
+}
+
 int	main(void)
 {
 	t_vars	vars;
+	int x;
+	int i = 0;
 
+	x = 0;
 	vars.mlx = mlx_init();
 	vars.win = mlx_new_window(vars.mlx, 1000, 500, "Hello world!");
 	vars.b.img = mlx_xpm_file_to_image(vars.mlx, "textures/brick.xpm", &vars.b.width, &vars.b.height);
@@ -100,8 +110,8 @@ int	main(void)
 	mlx_hook(vars.win, 17, 0, close_win, &vars);
 	mlx_key_hook(vars.win, key_hook, &vars);
 	mlx_string_put(vars.mlx, vars.win, 0, 0, 0x00FFFFFF, "Hello world!");
-	mlx_loop_hook(vars.mlx, render_w, &vars);
-	mlx_loop_hook(vars.mlx, render_b, &vars);
+	mlx_loop_hook(vars.mlx, incre, &x);
+	mlx_loop_hook(vars.mlx, NULL, NULL);
 	mlx_loop(vars.mlx);
 	return (0);
 }

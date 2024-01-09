@@ -16,12 +16,12 @@ BSRC = bonus/map_utils/map_utils.c bonus/parse_utils/parse_args.c \
 	bonus/map_utils/map_utils2.c bonus/mlx_utils/init_mlx.c \
 	bonus/mlx_utils/key_handler.c bonus/mlx_utils/move_lplayer.c \
 	bonus/mlx_utils/move_gplayer.c bonus/mlx_utils/mlx_utils.c \
-	bonus/so_long.c
+	bonus/mlx_utils/move_lenemy.c bonus/so_long.c
 BOBJ = $(BSRC:.c=.o)
 CC = cc 
-CFLAGS = -Wall -Wextra -Werror
-#MLXFLAGS = -lmlx -framework OpenGL -framework AppKit
-MLXFLAGS = mlx/libmlx_Linux.a -lXext -lX11 -lm
+CFLAGS = -Wall -Wextra -Werror -g
+MLXFLAGS = -lmlx -framework OpenGL -framework AppKit
+#MLXFLAGS = mlx/libmlx_Linux.a -lXext -lX11 -lm
 NAME = so_long
 NAME_BONUS = so_long_bonus
 VFLAGS = --leak-check=full --show-leak-kinds=all --track-origins=yes 

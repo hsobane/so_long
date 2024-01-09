@@ -6,7 +6,7 @@
 /*   By: hsobane <hsobane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:37:59 by hsobane           #+#    #+#             */
-/*   Updated: 2023/12/30 14:25:08 by hsobane          ###   ########.fr       */
+/*   Updated: 2024/01/09 20:13:45 by hsobane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	check_dimension(t_map *map)
 	}
 	if (height < 3 || width < 3)
 		return (write(2, "Map is too small\n", 17), 1);
-	if (height > 21 || width > 38)
+	if (height > 100 || width > 102)
 		return (write(2, "Map is too big\n", 15), 1);
 	delete_newline(map);
 	return (0);

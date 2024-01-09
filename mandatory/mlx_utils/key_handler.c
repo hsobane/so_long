@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_handler.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsobane <hsobane@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: hsobane <hsobane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 12:58:05 by hsobane           #+#    #+#             */
-/*   Updated: 2024/01/02 19:03:55 by hsobane          ###   ########.fr       */
+/*   Updated: 2024/01/08 13:50:24 by hsobane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,10 @@ int	exit_game(t_vars *vars)
 	free(vars->map);
 	free_imgs(vars);
 	mlx_destroy_window(vars->mlx, vars->win);
-	mlx_destroy_display(vars->mlx);
-	free(vars->mlx);
+	//mlx_destroy_display(vars->mlx);
+	//free(vars->mlx);
+	printf("exit game\n");
+	fflush(stdout);
 	exit(0);
 	return (0);
 }

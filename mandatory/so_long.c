@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsobane <hsobane@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: hsobane <hsobane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 20:20:49 by hsobane           #+#    #+#             */
-/*   Updated: 2024/01/03 00:09:04 by hsobane          ###   ########.fr       */
+/*   Updated: 2024/01/08 13:53:10 by hsobane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,19 @@ void	reset_map(char **map)
 	}
 }
 
+void check()
+{
+	printf("check\n");
+	fflush(stdout);
+	system("leaks so_long");
+}
+
 int	main(int argc, char **argv)
 {
 	t_vars	vars;
 	t_map	*map;
 
+	//atexit(check);
 	map = parse_args(argc, argv);
 	vars.map = map_to_matrix(map);
 	vars.map_raw = map;

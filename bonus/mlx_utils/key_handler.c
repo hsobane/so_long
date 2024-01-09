@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_handler.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsobane <hsobane@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: hsobane <hsobane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 12:58:05 by hsobane           #+#    #+#             */
-/*   Updated: 2024/01/02 19:03:55 by hsobane          ###   ########.fr       */
+/*   Updated: 2024/01/09 12:04:37 by hsobane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ int	exit_game(t_vars *vars)
 	free(vars->map);
 	free_imgs(vars);
 	mlx_destroy_window(vars->mlx, vars->win);
-	mlx_destroy_display(vars->mlx);
-	free(vars->mlx);
+	//mlx_destroy_display(vars->mlx);
+	//free(vars->mlx);
 	exit(0);
 	return (0);
 }
@@ -45,7 +45,7 @@ int	key_press(int keycode, t_vars *vars)
 	else if (keycode == LEFT || keycode == RIGHT || keycode == UP
 		|| keycode == DOWN)
 	{
-		vars->data.direction = keycode;
+		vars->data.pdirection = keycode;
 		move_lplayer(vars, keycode);
 	}
 	return (0);

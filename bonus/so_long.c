@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsobane <hsobane@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: hsobane <hsobane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 20:20:49 by hsobane           #+#    #+#             */
-/*   Updated: 2024/01/03 01:47:37 by hsobane          ###   ########.fr       */
+/*   Updated: 2024/01/09 19:42:10 by hsobane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
 # define BLUE "\033[0;34m"
+# define RED "\033[0;31m"
 # define RESET "\033[0m"
 
 void	print_matrix(char **matrix, int x, int y)
@@ -28,7 +29,7 @@ void	print_matrix(char **matrix, int x, int y)
 		while (matrix[i][j])
 		{
 			if (i == y && j == x)
-				printf(BLUE "%c" RESET, matrix[i][j]);
+				printf(RED "%c" RESET, matrix[i][j]);
 			else
 				printf("%c", matrix[i][j]);
 			j++;
@@ -68,11 +69,18 @@ void	reset_map(char **map)
 	}
 }
 
+void sigint_handler(int sig)
+{
+	(void)sig;
+}
+
 int	main(int argc, char **argv)
 {
 	t_vars	vars;
 	t_map	*map;
 	
+	printf("pid: %d\n", getpid());
+	signal(SIGUSR1, sigint_handler);
 	map = parse_args(argc, argv);
 	vars.map = map_to_matrix(map);
 	vars.map_raw = map;

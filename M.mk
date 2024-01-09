@@ -2,7 +2,7 @@ SRC = main.c
 OBJ = $(SRC:.c=.o)
 CC = cc -g
 NAME = main
-MLx = mlx/libmlx.a -lXext -lX11 -lm
+MLx = -lmlx -framework OpenGL -framework AppKit
 
 all: $(NAME)
 

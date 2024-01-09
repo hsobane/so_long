@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flood_fill.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsobane <hsobane@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: hsobane <hsobane@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 16:29:57 by hsobane           #+#    #+#             */
-/*   Updated: 2024/01/03 01:45:09 by hsobane          ###   ########.fr       */
+/*   Updated: 2024/01/09 20:03:31 by hsobane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,9 @@ static void	set_square(char **map, int x, int y, int *c)
 		map[y][x] = 'N';
 }
 
-static void	unset_square(char **map, int x, int y)
+void	unset_square(char **map, int x, int y)
 {
-	if (map[y][x] == 'V')
-		map[y][x] = '0';
-	else if (map[y][x] == 'Q')
+	if (map[y][x] == 'Q')
 		map[y][x] = 'P';
 	else if (map[y][x] == 'K')
 		map[y][x] = 'e';
@@ -75,6 +73,5 @@ int	flood_fill(char **map, int x, int y, int *c)
 		return (1);
 	if (flood_fill(map, x, y - 1, c))
 		return (1);
-	unset_square(map, x, y);
 	return (0);
 }
